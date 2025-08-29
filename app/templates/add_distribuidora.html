@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}Agregar Producto{% endblock %}
+
+{% block content %}
+<body>
+    <h1>Agregar Distribuidora</h1>
+    {% if error %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+    {% endif %}
+    <form action="{{ url_for('add_distribuidora') }}" method="post" class="form-horizontal">
+        <div class="form-group">
+            <label for="identificacion">Identificación:</label>
+            <input type="number" name="identificacion" class="form-control input-mediano" required placeholder="Identificación" min="1">
+        </div>
+    
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" class="form-control input-mediano" required placeholder="Nombre distribuidora" maxlength="100">
+        </div>
+
+        <div class="form-group">
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" name="telefono" class="form-control input-mediano" required placeholder="Teléfono" pattern="[0-9]{7,}" title="El teléfono debe contener al menos 7 dígitos">
+        </div>
+
+        <div class="form-group">
+            <label for="direccion">Dirección:</label>
+            <input type="text" name="direccion" class="form-control input-mediano" required placeholder="Dirección" maxlength="200">
+        </div>
+
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </div>
+    </form>
+</body>
+{% endblock %}

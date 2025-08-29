@@ -1,0 +1,57 @@
+{% extends "layout_empleado.html" %}
+
+{% block title %}
+    {% if action == 'edit' %}Editar Producto
+    {% elif action == 'delete' %}Eliminar Producto
+    {% else %}Detalles del Producto
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<body>
+    {% if action == 'edit' %}
+        <h1>Editar Producto</h1>
+        <form action="{{ url_for('producto_empleado', action='edit', codigo_producto=producto.codigo_producto) }}" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="{{ producto.nombre }}" class="form-control input-mediano" required placeholder="Nombre Producto">
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="precio" value="{{ producto.precio }}" step="0.01" class="form-control input-mediano" required placeholder="Precio">
+            </div>
+            <div class="form-group">
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" name="tipo" value="{{ producto.tipo }}" class="form-control input-mediano" required placeholder="Tipo de Producto">
+            </div>
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" value="{{ producto.marca }}" class="form-control input-mediano" required placeholder="Marca">
+            </div>
+            <div class="form-group">
+                <label for="distribuidora_id">Distribuidora ID:</label>
+                <input type="number" id="distribuidora_id" name="distribuidora_id" value="{{ producto.distribuidora_id }}" class="form-control input-mediano" required placeholder="ID Distribuidora">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Actualizar Producto</button>
+            </div>
+        </form>
+    {% elif action == 'delete' %}
+        <h1>Eliminar Producto</h1>
+        <p>¿Estás seguro de que deseas eliminar el producto <strong>{{ producto.nombre }}</strong> con código <strong>{{ producto.codigo_producto }}</strong>?</p>
+        <form action="{{ url_for('producto_empleado', action='delete', codigo_producto=producto.codigo_producto) }}" method="post">
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a href="{{ url_for('productos_empleado') }}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    {% else %}
+        <h1>Detalles del Producto</h1>
+        <p><strong>Código:</strong> {{ producto.codigo_producto }}</p>
+        <p><strong>Nombre:</strong> {{ producto.nombre }}</p>
+        <p><strong>Precio:</strong> {{ producto.precio }}</p>
+        <p><strong>Tipo:</strong> {{ producto.tipo }}</p>
+        <p><strong>Marca:</strong> {{ producto.marca }}</p>
+        <p><strong>Distribuidora ID:</strong> {{ producto.distribuidora_id }}</p>
+        <a href="{{ url_for('productos_empleado') }}" class="btn btn-primary">Volver al listado de productos</a>
+    {% endif %}
+</body>
+{% endblock %}

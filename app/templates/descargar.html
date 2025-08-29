@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %} EMPLEADOS {% endblock %}
+
+{% block content %}
+    <h1 class="titulo2">Lista de Empleado</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IDENTIFICACIÓN</th>
+                <th>NOMBRE</th>
+                <th>Cargo</th>
+                <th>Salario</th>
+                <th>seccion tipo</th>
+                <th>seccion nombre</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for empleado in empleados %}
+                <tr>
+                    <td>{{ empleado.identificacion }}</td>
+                    <td>{{ empleado.nombre }}</td>
+                    <td>{{ empleado.cargo }}</td>
+                    <td>{{ empleado.salario }}</td>
+                    <td>{{ empleado.seccion_tipo }}</td>
+                    <td>{{ empleado.seccion_nombre }}</td>
+                    <td>
+                        
+                        <a href="{{ url_for('download_pdf',user_id=empleado.identificacion) }}" target="_blank" class="btn btn-success">Descargar Nomina Patronal</a>
+                        <a href="{{ url_for('download_pdf2',user_id=empleado.identificacion) }}" target="_blank" class="btn btn-success">Descargar Nomina Empleado</a>
+                        <a href="{{ url_for('view_pdf',user_id=empleado.identificacion) }}" target="_blank" class="btn btn-info">Nomina Patronal</a>
+                        <a href="{{ url_for('view_pdf2',user_id=empleado.identificacion) }}" target="_blank" class="btn btn-primary">Nomina Empleado</a>
+                        <a href="{{ url_for('mostrar_formulario_email', identificacion=empleado.identificacion) }}" class="btn btn-secondary">EMAIL</a>
+
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

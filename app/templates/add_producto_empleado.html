@@ -1,0 +1,44 @@
+{% extends "layout_empleado.html" %}
+
+{% block title %}Agregar Producto {% endblock %}
+
+{% block content %}
+<body>
+    <h1>Agregar Producto</h1>
+    <form action="{{ url_for('add_producto_empleado') }}" method="post" class="form-horizontal form-margen">
+        <div class="form-group">
+            <label>Código de Producto:</label><br>
+            <input type="number" name="codigo_producto" class="form-control input-mediano" required placeholder="Codigo De Producto"><br>
+        </div>
+    
+        <div class="form-group">
+            <label>Nombre:</label><br>
+            <input type="text" name="nombre" class="form-control input-mediano" required placeholder="Nombre Producto"><br>
+        </div>
+    
+        <div class="form-group">
+            <label>Precio:</label><br>
+            <input type="number" name="precio" step="0.01" class="form-control input-mediano" required placeholder="Precio del Producto"><br>    
+        </div>
+    
+        <div class="form-group">
+            <label>Tipo:</label><br>
+            <input type="text" name="tipo" class="form-control input-mediano" required placeholder="Tipo"><br>            
+        </div>
+
+        <div class="form-group">
+            <label>Marca:</label><br>
+            <input type="text" name="marca" class="form-control input-mediano" required placeholder="Marca"><br>
+        </div>
+    
+        <div class="form-group">
+            <label>Distribuidora ID:</label><br>
+            <input type="number" name="distribuidora_id" class="form-control input-mediano" required placeholder="Distribuidora"><br><br>
+        </div>
+    
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary">Guardar Producto</button>
+        </div>
+    </form>
+</body>
+{% endblock %}

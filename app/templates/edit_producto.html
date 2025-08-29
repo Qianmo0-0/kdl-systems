@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %} Editar Producto {% endblock %}
+
+{% block content %}
+<body>
+    <h1>Editar Producto</h1>
+    <form action="{{ url_for('edit_producto', codigo_producto=producto.codigo_producto) }}" method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" value="{{ producto.nombre }}" class="form-control input-mediano" required placeholder="Nombre Producto" maxlength="100">
+        </div>
+        <div class="form-group">
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" value="{{ producto.precio }}" step="0.01" class="form-control input-mediano" required placeholder="Precio">
+        </div>
+        <div class="form-group">
+            <label for="tipo">Tipo:</label>
+            <input type="text" id="tipo" name="tipo" value="{{ producto.tipo }}" class="form-control input-mediano" required placeholder="Tipo de Producto">
+        </div>
+        <div class="form-group">
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" name="marca" value="{{ producto.marca }}" class="form-control input-mediano" required placeholder="Marca">
+        </div>
+        <div class="form-group">
+            <label for="distribuidora_id">Distribuidora ID:</label>
+            <input type="number" id="distribuidora_id" name="distribuidora_id" value="{{ producto.distribuidora_id }}" class="form-control input-mediano" required placeholder="ID Distribuidora">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Actualizar Producto</button>
+        </div>
+    </form>
+</body>
+{% endblock %}

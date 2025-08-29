@@ -1,0 +1,56 @@
+{% extends "layout_empleado.html" %}
+
+{% block title %}
+    {% if action == 'view' %}
+        Ver Distribuidora
+    {% elif action == 'edit' %}
+        Editar Distribuidora
+    {% elif action == 'delete' %}
+        Eliminar Distribuidora
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<body>
+    {% if action == 'view' %}
+        <h1>Detalles de la Distribuidora</h1>
+        <p><strong>Identificación:</strong> {{ distribuidora.identificacion }}</p>
+        <p><strong>Nombre:</strong> {{ distribuidora.nombre }}</p>
+        <p><strong>Dirección:</strong> {{ distribuidora.direccion }}</p>
+        <p><strong>Teléfono:</strong> {{ distribuidora.telefono }}</p>
+        <a href="{{ url_for('distribuidoras_empleado') }}">Volver al listado de distribuidoras</a>
+
+    {% elif action == 'edit' %}
+        <h1>Editar Distribuidora</h1>
+        <form action="{{ url_for('distribuidora_empleado', action='edit', identificacion=distribuidora.identificacion) }}" method="post">
+            <div class="form-group">
+                <label for="identificacion" class="control-label">Identificación:</label>
+                <input type="text" id="identificacion" name="identificacion" value="{{ distribuidora.identificacion }}" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" name="nombre" value="{{ distribuidora.nombre }}" class="form-control input-mediano" required placeholder="Nombre distribuidora" maxlength="100">
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" name="telefono" value="{{ distribuidora.telefono }}" class="form-control input-mediano" required placeholder="Teléfono" pattern="[0-9]{7,}" title="El teléfono debe contener al menos 7 dígitos">
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" name="direccion" value="{{ distribuidora.direccion }}" class="form-control input-mediano" required placeholder="Dirección" maxlength="200">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Actualizar Distribuidora</button>
+            </div>
+        </form>
+
+    {% elif action == 'delete' %}
+        <h1>Eliminar Distribuidora</h1>
+        <p>¿Estás seguro de que deseas eliminar la distribuidora <strong>{{ distribuidora.nombre }}</strong> con identificación <strong>{{ distribuidora.identificacion }}</strong>?</p>
+        <form action="{{ url_for('distribuidora_empleado', action='delete', identificacion=distribuidora.identificacion) }}" method="post">
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a href="{{ url_for('distribuidoras_empleado') }}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    {% endif %}
+</body>
+{% endblock %}

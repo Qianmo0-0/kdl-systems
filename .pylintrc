@@ -1,0 +1,52 @@
+[MASTER]
+# Agregar directorios al path de Python
+init-hook='import sys; sys.path.append(".")'
+
+[REPORTS]
+# Establecer el formato de salida
+output-format=text
+
+# Incluir estadísticas en el reporte
+reports=yes
+
+# Establecer el score mínimo
+fail-under=7.0
+
+[MESSAGES CONTROL]
+# Deshabilitar mensajes específicos
+disable=
+    C0114, # missing-module-docstring
+    C0115, # missing-class-docstring
+    C0116, # missing-function-docstring
+    R0903, # too-few-public-methods
+    R0913, # too-many-arguments
+    W0621, # redefined-outer-name
+    W0703, # broad-except
+    C0103, # invalid-name
+
+[FORMAT]
+# Longitud máxima de línea
+max-line-length=120
+
+# Estilo de indentación
+indent-string='    '
+
+[BASIC]
+# Nombres de variables permitidos
+good-names=i,j,k,ex,Run,_,id,db
+
+# Nombres de variables prohibidos
+bad-names=foo,bar,baz,toto,tutu,tata
+
+[SIMILARITIES]
+# Número mínimo de líneas similares
+min-similarity-lines=4
+
+# Umbral de similitud
+ignore-comments=yes
+ignore-docstrings=yes
+ignore-imports=yes
+
+[MISCELLANEOUS]
+# Lista de notas
+notes=

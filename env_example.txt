@@ -1,0 +1,21 @@
+# Configuración de la aplicación
+SECRET_KEY=tu_clave_secreta_aqui
+FLASK_DEBUG=True
+
+# Configuración de la base de datos
+DB_SERVER=浅陌\\SQLEXPRESS
+DB_NAME=KdlSystems
+DB_USER=sa
+DB_PASSWORD=tu_password_aqui
+DB_DRIVER=ODBC Driver 17 for SQL Server
+
+# Configuración de email
+MAIL_SERVER=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USE_SSL=True
+MAIL_USERNAME=tu_email@gmail.com
+MAIL_PASSWORD=tu_password_de_aplicacion
+
+# Configuración de la aplicación
+UPLOAD_FOLDER=uploads
+MAX_CONTENT_LENGTH=16777216

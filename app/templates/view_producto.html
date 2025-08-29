@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %} View Producto {% endblock %}
+
+{% block content %}
+<body>
+    <h1>Detalles del Producto</h1>
+    <p><strong>Código:</strong> {{ producto.codigo_producto }}</p>
+    <p><strong>Nombre:</strong> {{ producto.nombre }}</p>
+    <p><strong>Precio:</strong> {{ producto.precio }}</p>
+    <p><strong>Tipo:</strong> {{ producto.tipo }}</p>
+    <p><strong>Marca:</strong> {{ producto.marca }}</p>
+    <p><strong>Distribuidora ID:</strong> {{ producto.distribuidora_id }}</p>
+    <a href="{{ url_for('productos') }}">Volver al listado de productos</a>
+</body>
+{% endblock %}

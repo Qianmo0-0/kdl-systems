@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styless.css') }}">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <form action="{{ url_for('login') }}" method="POST">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input type="text" id="username" name="username" class="form-control" placeholder="Nombre de Usuario" required>
+            </div>
+            <div class="input-box">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox"> Remember me</label>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+            </div>
+            <div class="register-link">
+                <p>
+                <a href="{{ url_for('consultar_producto_cliente') }}">Cliente</a><p/>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

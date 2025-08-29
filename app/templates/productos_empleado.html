@@ -1,0 +1,35 @@
+{% extends "layout_empleado.html" %}
+
+{% block title %} Producto {% endblock %}
+
+{% block content %}
+<body>
+    <h1>Listado de Productos</h1>
+    <a href="{{ url_for('add_producto_empleado') }}">Agregar Producto</a>
+    <table class="table">
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Tipo</th>
+            <th>Marca</th>
+            <th>Distribuidora ID</th>
+            <th>Acciones</th>
+        </tr>
+        {% for producto in productos %}
+        <tr>
+            <td>{{ producto.codigo_producto }}</td>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.precio }}</td>
+            <td>{{ producto.tipo }}</td>
+            <td>{{ producto.marca }}</td>
+            <td>{{ producto.distribuidora_id }}</td>
+            <td>
+                <a href="{{ url_for('producto_empleado', action='view', codigo_producto=producto.codigo_producto) }}" class="btn btn-info btn-sm">Ver</a>
+                <a href="{{ url_for('producto_empleado', action='edit', codigo_producto=producto.codigo_producto) }}" class="btn btn-primary">Editar</a>
+                <a href="{{ url_for('producto_empleado', action='delete', codigo_producto=producto.codigo_producto) }}" class="btn btn-danger">Eliminar</a>     </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+{% endblock %}

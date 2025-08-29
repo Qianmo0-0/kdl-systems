@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}Buscar Producto por Nombre{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Buscar Producto por Nombre</h1>
+    <a href="{{ url_for('consultar_producto') }}">Buscar Por Codigo</a>
+    <form action="{{ url_for('buscar_producto_por_nombre') }}" method="POST" class="form-inline mb-4">
+        <div class="form-group mr-3">
+            <label for="nombre" class="mr-2">Nombre del Producto:</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingrese el nombre" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    {% if productos %}
+        <h2 class="mt-4">Resultados de la Búsqueda</h2>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                    <tr>
+                        <td>{{ producto.codigo_producto }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>₡{{ producto.precio }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-muted">No se encontraron productos.</p>
+    {% endif %}
+</div>
+{% endblock %}
