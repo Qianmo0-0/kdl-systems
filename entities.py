@@ -65,7 +65,7 @@ class Empleado:
             raise ValueError("El correo debe ser una cadena de texto válida y no puede estar vacío.")
         if not self.cargo or not isinstance(self.cargo, str) or len(self.cargo.strip()) == 0:
             raise ValueError("El cargo debe ser una cadena de texto válida y no puede estar vacío.")
-        if not self.salario or not isinstance(self.salario, (int, float)) or self.salario <= 0:
+        if self.salario is None or (not isinstance(self.salario, (int, float)) and not str(self.salario).replace('.', '').isdigit()) or float(self.salario) <= 0:
             raise ValueError("El salario debe ser un número positivo válido.")
         if not self.seccion_tipo or not isinstance(self.seccion_tipo, str) or len(self.seccion_tipo.strip()) == 0:
             raise ValueError("El tipo de sección debe ser una cadena de texto válida y no puede estar vacío.")

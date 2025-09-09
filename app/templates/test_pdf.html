@@ -15,10 +15,10 @@
                 <div class="card-body">
                     <p>Prueba la generación y visualización del PDF de aporte patronal.</p>
                     <div class="btn-group" role="group">
-                        <a href="{{ url_for('download_pdf', user_id=123456789) }}" class="btn btn-success">
+                        <a href="{{ url_for('download_pdf', user_id=1) }}" class="btn btn-success">
                             <i class="fas fa-download"></i> Descargar PDF
                         </a>
-                        <a href="{{ url_for('view_pdf', user_id=123456789) }}" target="_blank" class="btn btn-info">
+                        <a href="{{ url_for('view_pdf', user_id=1) }}" target="_blank" class="btn btn-info">
                             <i class="fas fa-eye"></i> Ver PDF
                         </a>
                     </div>
@@ -34,10 +34,10 @@
                 <div class="card-body">
                     <p>Prueba la generación y visualización del PDF de nómina del empleado.</p>
                     <div class="btn-group" role="group">
-                        <a href="{{ url_for('download_pdf2', user_id=123456789) }}" class="btn btn-warning">
+                        <a href="{{ url_for('download_pdf2', user_id=1) }}" class="btn btn-warning">
                             <i class="fas fa-download"></i> Descargar PDF
                         </a>
-                        <a href="{{ url_for('view_pdf2', user_id=123456789) }}" target="_blank" class="btn btn-primary">
+                        <a href="{{ url_for('view_pdf2', user_id=1) }}" target="_blank" class="btn btn-primary">
                             <i class="fas fa-eye"></i> Ver PDF
                         </a>
                     </div>
@@ -47,12 +47,21 @@
     </div>
     
     <div class="mt-4">
+        <div class="alert alert-warning">
+            <h6>⚠️ Importante:</h6>
+            <p>Antes de probar los PDFs, asegúrate de que exista un empleado con ID 1 en la base de datos.</p>
+            <a href="{{ url_for('create_test_employee') }}" class="btn btn-warning">
+                <i class="fas fa-user-plus"></i> Crear Empleado de Prueba (ID: 1)
+            </a>
+        </div>
+        
         <div class="alert alert-info">
             <h6>Instrucciones:</h6>
             <ul>
-                <li><strong>Descargar PDF:</strong> Descarga el archivo PDF a tu computadora</li>
-                <li><strong>Ver PDF:</strong> Abre el PDF en una nueva pestaña del navegador</li>
-                <li>Si hay errores, verifica que el empleado con ID 123456789 exista en la base de datos</li>
+                <li><strong>1. Crear Empleado:</strong> Primero crea el empleado de prueba con el botón de arriba</li>
+                <li><strong>2. Descargar PDF:</strong> Descarga el archivo PDF a tu computadora</li>
+                <li><strong>3. Ver PDF:</strong> Abre el PDF en una nueva pestaña del navegador</li>
+                <li>Si hay errores, verifica que el empleado con ID 1 exista en la base de datos</li>
             </ul>
         </div>
     </div>

@@ -327,6 +327,39 @@ def test_pdf():
         return redirect(url_for('login')) 
     return render_template('test_pdf.html')
 
+@app.route('/create-test-employee')
+def create_test_employee():
+    if 'username' not in session or session.get('role', '').lower() != 'administrador':
+        return redirect(url_for('login'))
+    
+    try:
+        # Crear empleado de prueba
+        empleado = Empleado(
+            identificacion=1,
+            nombre="Juan Pérez",
+            correo="juan.perez@test.com",
+            cargo="Desarrollador",
+            salario=500000.0,
+            seccion_tipo="TI",
+            seccion_nombre="Desarrollo"
+        )
+        
+        # Validar empleado
+        empleado.validate()
+        
+        # Intentar insertar en la base de datos (puede fallar si ya existe)
+        try:
+            business_logic.data_access.insert_empleado(
+                empleado.identificacion, empleado.nombre, empleado.correo, 
+                empleado.cargo, empleado.salario, empleado.seccion_tipo, empleado.seccion_nombre
+            )
+            return "Empleado de prueba creado exitosamente"
+        except Exception as e:
+            return f"Empleado de prueba ya existe o error en BD: {str(e)}"
+            
+    except Exception as e:
+        return f"Error al crear empleado de prueba: {str(e)}"
+
 
 
 @app.route('/submit', methods=['POST'])
