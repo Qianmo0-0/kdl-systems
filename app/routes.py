@@ -321,6 +321,12 @@ def home():
         return redirect(url_for('login')) 
     return render_template('index.html')
 
+@app.route('/test-pdf')
+def test_pdf():
+    if 'username' not in session or session.get('role', '').lower() != 'administrador':
+        return redirect(url_for('login')) 
+    return render_template('test_pdf.html')
+
 
 
 @app.route('/submit', methods=['POST'])
@@ -411,41 +417,75 @@ def delete_empleado(identificacion):
 
 @app.route('/download-pdf/<int:user_id>', methods=['GET', 'POST'])
 def download_pdf(user_id):
-    empleado = business_logic.get_empleado(user_id)
-    pdf = business_logic.generate_payroll_pdf(empleado)
-    now = datetime.now()
-    timestamp = now.strftime('%Y%m%d_%H%M%S')
-    
-    filename = f'{empleado.identificacion}_{timestamp}.pdf'
-    
-    response = make_response(send_file(pdf, mimetype='application/pdf', as_attachment=True, download_name=filename))
-    return response
+    try:
+        empleado = business_logic.get_empleado(user_id)
+        if not empleado:
+            return "Empleado no encontrado", 404
+            
+        pdf = business_logic.generate_payroll_pdf(empleado)
+        now = datetime.now()
+        timestamp = now.strftime('%Y%m%d_%H%M%S')
+        
+        filename = f'aporte_patronal_{empleado.identificacion}_{timestamp}.pdf'
+        
+        response = make_response(pdf.getvalue())
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = f'attachment; filename={filename}'
+        return response
+    except Exception as e:
+        return f"Error al generar PDF: {str(e)}", 500
 
 @app.route('/download-pdf2/<int:user_id>', methods=['GET', 'POST'])
 def download_pdf2(user_id):
-    empleado = business_logic.get_empleado(user_id)
-    pdf = business_logic.generate_payroll_pdf_trabajador(empleado)
-    now = datetime.now()
-    timestamp = now.strftime('%Y%m%d_%H%M%S')
-    
-    filename = f'{empleado.identificacion}_{timestamp}.pdf'
-    
-    response = make_response(send_file(pdf, mimetype='application/pdf', as_attachment=True, download_name=filename))
-    return response
+    try:
+        empleado = business_logic.get_empleado(user_id)
+        if not empleado:
+            return "Empleado no encontrado", 404
+            
+        pdf = business_logic.generate_payroll_pdf_trabajador(empleado)
+        now = datetime.now()
+        timestamp = now.strftime('%Y%m%d_%H%M%S')
+        
+        filename = f'nomina_trabajador_{empleado.identificacion}_{timestamp}.pdf'
+        
+        response = make_response(pdf.getvalue())
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = f'attachment; filename={filename}'
+        return response
+    except Exception as e:
+        return f"Error al generar PDF: {str(e)}", 500
 
 @app.route('/view-pdf/<int:user_id>', methods=['GET', 'POST'])
 def view_pdf(user_id):
-    empleado = business_logic.get_empleado(user_id)
-    pdf = business_logic.generate_payroll_pdf(empleado)
-    response = make_response(send_file(pdf, mimetype='application/pdf'))
-    return response
+    try:
+        empleado = business_logic.get_empleado(user_id)
+        if not empleado:
+            return "Empleado no encontrado", 404
+            
+        pdf = business_logic.generate_payroll_pdf(empleado)
+        
+        response = make_response(pdf.getvalue())
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'inline; filename=aporte_patronal.pdf'
+        return response
+    except Exception as e:
+        return f"Error al generar PDF: {str(e)}", 500
 
-@app.route('/view-pdf2<int:user_id>', methods=['GET', 'POST'])
+@app.route('/view-pdf2/<int:user_id>', methods=['GET', 'POST'])
 def view_pdf2(user_id):
-    empleado = business_logic.get_empleado(user_id)
-    pdf = business_logic.generate_payroll_pdf_trabajador(empleado)
-    response = make_response(send_file(pdf, mimetype='application/pdf'))
-    return response
+    try:
+        empleado = business_logic.get_empleado(user_id)
+        if not empleado:
+            return "Empleado no encontrado", 404
+            
+        pdf = business_logic.generate_payroll_pdf_trabajador(empleado)
+        
+        response = make_response(pdf.getvalue())
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'inline; filename=nomina_trabajador.pdf'
+        return response
+    except Exception as e:
+        return f"Error al generar PDF: {str(e)}", 500
 
 
 ###########################################################################################
